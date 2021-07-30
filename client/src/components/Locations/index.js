@@ -1,21 +1,17 @@
 import React from 'react';
 
-function Locations() {
+function Locations(props) {
+
+  const { locations } = props;
+
   return (
-      <ul className="text-4xl w-80 mx-10 py-10 border-8 border-gray-900 text-center self-center">
-        <li className="py-10">
-          <button>Location 1</button>
+    <ul className="text-4xl w-80 mx-10 py-10 border-8 border-gray-900 text-center self-center">
+      {locations.map(location => (
+        <li className="py-10" key={location}>
+          <button>{location}</button>
         </li>
-        <li className="py-10">
-          <button>Location 2</button>
-        </li>
-        <li className="py-10">
-          <button>Location 3</button>
-        </li>
-        <li className="py-10">
-          <button>Location 4</button>
-        </li>
-      </ul>
+      ))}
+    </ul>
   )
 }
 
