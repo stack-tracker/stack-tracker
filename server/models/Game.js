@@ -16,11 +16,11 @@ const gameSchema = new Schema(
       type: Number,
       required: true
     },
-    low_limit: {
+    small_blind: {
       type: Number,
       required: true,
     },
-    high_limit: {
+    big_blind: {
       type: Number,
       required: true
     },
