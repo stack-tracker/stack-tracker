@@ -1,9 +1,11 @@
-const mongoose = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
-const { Schema } = mongoose;
-
-const GameSchema = new Schema(
+const gameSchema = new Schema(
   {
+    gameId: {
+      type: Schema.Types.ObjectId,
+      default: () => Types.ObjectId()
+    },
     location: {
       type: String,
       required: true,
@@ -57,6 +59,4 @@ GameSchema.virtual('bb_per_hour').get(function() {
   return bbPerHour;
 });
 
-const Game = model('Game', GameSchema);
-
-module.exports = Game;
+module.exports = gameSchema;
