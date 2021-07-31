@@ -6,7 +6,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 
 import Header from './components/Header';
-// import Charts from './components/Charts';
+import Charts from './components/Charts';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/charts" component={Charts} />
           </Switch>
       </Router>
     </div>

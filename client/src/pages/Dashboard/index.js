@@ -11,8 +11,8 @@ function Dashboard() {
         {
           location: 'place 1',
           hours: 5,
-          low_limit: .05,
-          high_limit: .10,
+          small_blind: .05,
+          big_blind: .10,
           buy_in: 10,
           cash_out: 50,
           date: Date.now(),
@@ -23,8 +23,8 @@ function Dashboard() {
         {
           location: 'place 2',
           hours: 5,
-          low_limit: .05,
-          high_limit: .10,
+          small_blind: .05,
+          big_blind: .10,
           buy_in: 10,
           cash_out: 50,
           date: Date.now(),
@@ -35,8 +35,8 @@ function Dashboard() {
         {
           location: 'place 3',
           hours: 5,
-          low_limit: .05,
-          high_limit: .10,
+          small_blind: .05,
+          big_blind: .10,
           buy_in: 10,
           cash_out: 50,
           date: Date.now(),
@@ -47,8 +47,8 @@ function Dashboard() {
         {
           location: 'place 4',
           hours: 5,
-          low_limit: .05,
-          high_limit: .10,
+          small_blind: .05,
+          big_blind: .10,
           buy_in: 10,
           cash_out: 50,
           date: Date.now(),
