@@ -3,22 +3,22 @@ import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis
 
 const Charts = () => {
     const sessions = [
-        {date: "7/5/2021", value: 1000},
-        {date: "7/8/2021", value: 200},
-        {date: "7/12/2021", value: -300},
-        {date: "7/15/2021", value: 400},
-        {date: "7/16/2021", value: 500},
-        {date: "7/19/2021", value: -146},
-        {date: "7/20/2021", value: 91},
-        {date: "7/21/2021", value: 409},
-        {date: "7/22/2021", value: -200},
-        {date: "7/23/2021", value: 567},
-        {date: "7/24/2021", value: -286},
-        {date: "7/25/2021", value: -120},
-        {date: "7/28/2021", value: 230},
-        {date: "7/29/2021", value: 444},
-        {date: "7/30/2021", value: -220},
-        {date: "7/31/2021", value: 556},
+        {date: "7/5/2021", Profit: 1000},
+        {date: "7/8/2021", Profit: 200},
+        {date: "7/12/2021", Profit: -300},
+        {date: "7/15/2021", Profit: 400},
+        {date: "7/16/2021", Profit: 500},
+        {date: "7/19/2021", Profit: -146},
+        {date: "7/20/2021", Profit: 91},
+        {date: "7/21/2021", Profit: 409},
+        {date: "7/22/2021", Profit: -200},
+        {date: "7/23/2021", Profit: 567},
+        {date: "7/24/2021", Profit: -286},
+        {date: "7/25/2021", Profit: -120},
+        {date: "7/28/2021", Profit: 230},
+        {date: "7/29/2021", Profit: 444},
+        {date: "7/30/2021", Profit: -220},
+        {date: "7/31/2021", Profit: 556},
     ];
 
     const bankroll = [
@@ -42,8 +42,8 @@ const Charts = () => {
 
     return (
         <div className="Charts">
-            <h1>Overall Poker Bankroll</h1>
-            <h2>Total Bank Roll</h2>
+            <h1>Overview</h1>
+            <h2>Total Bankroll</h2>
             <LineChart
                 width={500}
                 height={300}
@@ -78,8 +78,9 @@ const Charts = () => {
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
+                <Legend />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="value" fill="#82ca9d" />
+                <Bar dataKey="Profit" fill="#82ca9d" />
             </BarChart>
         </div>
     )
