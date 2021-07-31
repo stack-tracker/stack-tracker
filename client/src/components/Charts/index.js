@@ -79,7 +79,6 @@ const Charts = () => {
                 <YAxis />
                 <Tooltip />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="value" fill="#8884d8" />
                 <Bar dataKey="value" fill="#82ca9d" />
             </BarChart>
         </div>
