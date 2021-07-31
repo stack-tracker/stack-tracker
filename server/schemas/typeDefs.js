@@ -7,6 +7,17 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String
+        games: [Game]
+    }
+
+    type Game {
+        _id: ID
+        location: String
+        hours: Int
+        small_blind: Int
+        big_blind: Int
+        buy_in: Int
+        cash_out: Int
     }
 
     type Auth {
