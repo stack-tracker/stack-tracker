@@ -10,8 +10,8 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="flex flex-col">
-      <Header />
       <Router>
+        <Header />
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import Locations from '../../components/Locations';
+import Sidebar from '../../components/Sidebar';
 
 
 function Dashboard() {
@@ -65,9 +65,9 @@ function Dashboard() {
     });
   console.log(locationArr);
   return(
-    <div className="grid grid-cols-2 h-screen">
-      <Locations locations={locationArr}/>
-      <span className="text-6xl text-gray-900 leading-normal self-center justify-self-center">Welcome to your dashboard, {user.username}!</span>
+    <div className="grid gap-6 grid-cols-3 h-screen">
+      <Sidebar/>
+      <span className="text-6xl text-gray-900 leading-normal col-span-2 self-center place-self-start">Welcome to your dashboard, {user.username}!</span>
     </div>
   )
 }
