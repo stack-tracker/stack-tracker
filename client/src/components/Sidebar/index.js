@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const plus = <FontAwesomeIcon icon={faPlus} />
 function SideBar() {
@@ -15,10 +18,14 @@ function SideBar() {
         <button className="hover:text-gray-600 transform hover:scale-105 duration-75">Sessions</button>
       </li>
       <li className="py-10">
-        <button className="hover:text-gray-600 transform hover:scale-105 duration-75">Locations</button>
+        <Link to={'/locations'}>
+          <button className="hover:text-gray-600 transform hover:scale-105 duration-75">Locations</button>
+        </Link>
       </li>
       <li className="py-10">
-        <button className="hover:text-gray-600 transform hover:scale-105 duration-75">Charts</button>
+        <Link to={"/charts"}>
+          <button className="hover:text-gray-600 transform hover:scale-105 duration-75">Charts</button>
+        </Link>
       </li>
       <li className="py-10">
         <button className="text-5xl text-gray-900 hover:text-gray-600 transform hover:scale-105 duration-75">{plus}</button>
