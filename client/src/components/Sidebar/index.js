@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const plus = <FontAwesomeIcon icon={faPlus} />
