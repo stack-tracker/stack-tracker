@@ -58,11 +58,12 @@ function Dashboard() {
         },
       ]
     };
-    
+
     
     const locationArr = user.games.map(game => {
       return game.location;
     });
+    
   console.log(locationArr);
   return(
     <div className="grid gap-6 grid-cols-3 h-screen">
