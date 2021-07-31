@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LocationsBar from '../../components/LocationsBar';
+import LocationTable from '../../components/LocationTable';
 
 const user = {
     username: 'pokrGuy93',
@@ -77,12 +78,20 @@ function getLocations() {
   return uniqueLocations;
 };
 
+
 function Locations() {
   const locations = getLocations();
+  
+  const [locationState, setLocationState] = useState('');
+  
+  console.log(locationState);
+  
+ 
 
   return(
     <div className="grid gap-6 grid-cols-3 h-screen">
-      <LocationsBar locations={locations}/>
+      <LocationsBar locations={locations} locationState={locationState} setLocationState={setLocationState} />
+      { locationState !== '' && <LocationTable user={ user } locationState={locationState} /> }
     </div>
   )
 }
