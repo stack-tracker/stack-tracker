@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 
 import Header from './components/Header';
+// import Charts from './components/Charts';
 
 function App() {
   return (
