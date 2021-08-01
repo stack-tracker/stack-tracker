@@ -1,4 +1,8 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+
+const dollar = <FontAwesomeIcon icon={faDollarSign} />
 
 function LocationTable(props) {
   const { user, locationState } = props;
@@ -39,12 +43,12 @@ function LocationTable(props) {
             <tr key={i} className="border-b-2 border-gray-900">
               <td className="border-l-2 border-gray-900 p-3">{game.date}</td>
               <td className="border-l-2 border-gray-900 p-3">{game.hours}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.buy_in}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.small_blind}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.big_blind}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.cash_out}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.result}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.cash_per_hour}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.buy_in}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.small_blind}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.big_blind}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.cash_out}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.result}</td>
+              <td className="border-l-2 border-gray-900 p-3">${game.cash_per_hour}</td>
               <td className="border-l-2 border-gray-900 p-3">{game.bb_per_hour}</td>
             </tr>
           ))}

@@ -28,7 +28,9 @@ function SideBar() {
         </Link>
       </li>
       <li className="py-10">
-        <button className="text-5xl text-gray-900 hover:text-gray-600 transform hover:scale-105 duration-75">{plus}</button>
+        <Link to={"/addsession"}>
+          <button className="text-5xl text-gray-900 hover:text-gray-600 transform hover:scale-105 duration-75">{plus}</button>
+        </Link>
       </li>
     </ul>
   )
