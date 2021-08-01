@@ -1,8 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-
-const dollar = <FontAwesomeIcon icon={faDollarSign} />
 
 function LocationTable(props) {
   const { user, locationState } = props;
