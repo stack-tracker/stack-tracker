@@ -38,6 +38,25 @@ const Charts = () => {
         {date: "7/29/2021", Bankroll: 2789},
         {date: "7/30/2021", Bankroll: 2569},
         {date: "7/31/2021", Bankroll: 3125},
+    ];
+
+    const bbPerHour = [
+        {date: "7/5/2021", bb: 5},
+        {date: "7/8/2021", bb: 8},
+        {date: "7/12/2021", bb: 6},
+        {date: "7/15/2021", bb: 12},
+        {date: "7/16/2021", bb: 4},
+        {date: "7/19/2021", bb: 6},
+        {date: "7/20/2021", bb: 12},
+        {date: "7/21/2021", bb: 15},
+        {date: "7/22/2021", bb: 2},
+        {date: "7/23/2021", bb: 7},
+        {date: "7/24/2021", bb: 3},
+        {date: "7/25/2021", bb: -5},
+        {date: "7/28/2021", bb: -10},
+        {date: "7/29/2021", bb: 10},
+        {date: "7/30/2021", bb: 15},
+        {date: "7/31/2021", bb: 25},
     ]
 
     return (
@@ -82,6 +101,25 @@ const Charts = () => {
                 <ReferenceLine y={0} stroke="#000" />
                 <Bar dataKey="Profit" fill="#82ca9d" />
             </BarChart>
+            <h2>bb/Hour</h2>
+            <LineChart
+                width={500}
+                height={300}
+                data={bbPerHour}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="bb" stroke="#8884d8" activeDot={{ r: 8 }} />
+            </LineChart>
         </div>
     )
 }
