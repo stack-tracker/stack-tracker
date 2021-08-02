@@ -3,41 +3,41 @@ import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis
 
 const Charts = () => {
     const sessions = [
-        {sessionDate: "7/5/2021", Profit: 1000},
-        {sessionDate: "7/8/2021", Profit: 200},
-        {sessionDate: "7/12/2021", Profit: -300},
-        {sessionDate: "7/15/2021", Profit: 400},
-        {sessionDate: "7/16/2021", Profit: 500},
-        {sessionDate: "7/19/2021", Profit: -146},
-        {sessionDate: "7/20/2021", Profit: 91},
-        {sessionDate: "7/21/2021", Profit: 409},
-        {sessionDate: "7/22/2021", Profit: -200},
-        {sessionDate: "7/23/2021", Profit: 567},
-        {sessionDate: "7/24/2021", Profit: -286},
-        {sessionDate: "7/25/2021", Profit: -120},
-        {sessionDate: "7/28/2021", Profit: 230},
-        {sessionDate: "7/29/2021", Profit: 444},
-        {sessionDate: "7/30/2021", Profit: -220},
-        {sessionDate: "7/31/2021", Profit: 556},
+        {sessionDate: "7/5/2021", profit: 1000},
+        {sessionDate: "7/8/2021", profit: 200},
+        {sessionDate: "7/12/2021", profit: -300},
+        {sessionDate: "7/15/2021", profit: 400},
+        {sessionDate: "7/16/2021", profit: 500},
+        {sessionDate: "7/19/2021", profit: -146},
+        {sessionDate: "7/20/2021", profit: 91},
+        {sessionDate: "7/21/2021", profit: 409},
+        {sessionDate: "7/22/2021", profit: -200},
+        {sessionDate: "7/23/2021", profit: 567},
+        {sessionDate: "7/24/2021", profit: -286},
+        {sessionDate: "7/25/2021", profit: -120},
+        {sessionDate: "7/28/2021", profit: 230},
+        {sessionDate: "7/29/2021", profit: 444},
+        {sessionDate: "7/30/2021", profit: -220},
+        {sessionDate: "7/31/2021", profit: 556},
     ];
 
     const bankroll = [
-        {sessionDate: "7/5/2021", Bankroll: 1000},
-        {sessionDate: "7/8/2021", Bankroll: 1200},
-        {sessionDate: "7/12/2021", Bankroll: 900},
-        {sessionDate: "7/15/2021", Bankroll: 1300},
-        {sessionDate: "7/16/2021", Bankroll: 1800},
-        {sessionDate: "7/19/2021", Bankroll: 1654},
-        {sessionDate: "7/20/2021", Bankroll: 1745},
-        {sessionDate: "7/21/2021", Bankroll: 2154},
-        {sessionDate: "7/22/2021", Bankroll: 1954},
-        {sessionDate: "7/23/2021", Bankroll: 2521},
-        {sessionDate: "7/24/2021", Bankroll: 2235},
-        {sessionDate: "7/25/2021", Bankroll: 2115},
-        {sessionDate: "7/28/2021", Bankroll: 2345},
-        {sessionDate: "7/29/2021", Bankroll: 2789},
-        {sessionDate: "7/30/2021", Bankroll: 2569},
-        {sessionDate: "7/31/2021", Bankroll: 3125},
+        {sessionDate: "7/5/2021", bankroll: 1000},
+        {sessionDate: "7/8/2021", bankroll: 1200},
+        {sessionDate: "7/12/2021", bankroll: 900},
+        {sessionDate: "7/15/2021", bankroll: 1300},
+        {sessionDate: "7/16/2021", bankroll: 1800},
+        {sessionDate: "7/19/2021", bankroll: 1654},
+        {sessionDate: "7/20/2021", bankroll: 1745},
+        {sessionDate: "7/21/2021", bankroll: 2154},
+        {sessionDate: "7/22/2021", bankroll: 1954},
+        {sessionDate: "7/23/2021", bankroll: 2521},
+        {sessionDate: "7/24/2021", bankroll: 2235},
+        {sessionDate: "7/25/2021", bankroll: 2115},
+        {sessionDate: "7/28/2021", bankroll: 2345},
+        {sessionDate: "7/29/2021", bankroll: 2789},
+        {sessionDate: "7/30/2021", bankroll: 2569},
+        {sessionDate: "7/31/2021", bankroll: 3125},
     ];
 
     const bbPerHour = [
@@ -79,7 +79,7 @@ const Charts = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="Bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
             </LineChart>
             <h2>Individual Sessions</h2>
             <BarChart
@@ -99,7 +99,7 @@ const Charts = () => {
                 <Tooltip />
                 <Legend />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="Profit" fill="#82ca9d" />
+                <Bar dataKey="profit" fill="#82ca9d" />
             </BarChart>
             <h2>bb/Hour</h2>
             <LineChart
