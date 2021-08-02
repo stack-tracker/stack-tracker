@@ -21,6 +21,7 @@ const typeDefs = gql`
         buy_in: Int
         cash_out: Int
         date: String
+        username: String
     }
 
     type Auth {
@@ -30,13 +31,15 @@ const typeDefs = gql`
 
     type Query {
         user: User
+        games: [Game]
+        game: Game
     }
 
     type Mutation {
-        addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-        updateUser(firstName: String, lastName: String, email: String, password: String): User
+        addUser(username: String!, email: String!, password: String!): Auth
+        updateUser(username: String!, email: String!, password: String!): User
         login(email: String!, password: String!): Auth
-        
+        addGame(gameId: ID!): User
     }
 `;
 

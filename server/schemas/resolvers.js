@@ -6,17 +6,15 @@ const resolvers = {
     Query: {
         user: async (parent, args, context) => {
             if (context.user) {
-                const user = await User.findById(context.user._id).populate({
-                    populate: 'games'
-                });
+                const user = await User.findById(context.user._id);
 
                return user.games.id(_id);
             }
             throw new AuthenticationError('Not logged in');
         },
 
-        games: async (parent, { _id }) => {
-            const params = _id ? {  _id } : {};
+        games: async (parent, { username }) => {
+            const params = username ? { username } : {};
             return Game.find(params).sort({ date });
         },
 
@@ -34,7 +32,7 @@ const resolvers = {
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
-                return await User.findByIdAndUpdate(context.user._id, args, { new: true});
+                return await User.findByIdAndUpdate(context.user._id, args, { new: true });
             }
 
             throw new AuthenticationError('Not logged in');
@@ -55,9 +53,24 @@ const resolvers = {
             const token = signToken(user);
 
             return { token, user };
+        },
+        addGame: async (parent, args, context) => {
+            if (context.user) {
+                const game = await Game.create({ ...args, username: context.user.username });
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { games: game._id } },
+                    { new: true }
+                );
+
+                return game;
+            }
+
+            throw new AuthenticationError('You need to be logged in to add a session!');
         }
     }
 };
 
 
-module.exports = { resolvers } ;
+module.exports = resolvers;
