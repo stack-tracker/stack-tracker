@@ -1,6 +1,6 @@
 const { Schema, Types } = require('mongoose');
 
-const gameSchema = new Schema(
+const GameSchema = new Schema(
   {
     gameId: {
       type: Schema.Types.ObjectId,
@@ -33,8 +33,8 @@ const gameSchema = new Schema(
       required: true
     },
     date: {
-      type: Date,
-      default: Date.now
+      type: String,
+      required: true
     }
   },
   {
@@ -59,4 +59,4 @@ GameSchema.virtual('bb_per_hour').get(function() {
   return bbPerHour;
 });
 
-module.exports = gameSchema;
+module.exports = GameSchema;

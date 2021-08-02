@@ -7,8 +7,7 @@ const typeDefs = gql`
 
     type User {
         _id: ID
-        firstName: String
-        lastName: String
+        username: String
         email: String
         games: [Game]
     }
@@ -21,7 +20,7 @@ const typeDefs = gql`
         big_blind: Int
         buy_in: Int
         cash_out: Int
-        date: Date
+        date: String
     }
 
     type Auth {
@@ -37,6 +36,7 @@ const typeDefs = gql`
         addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         login(email: String!, password: String!): Auth
+        
     }
 `;
 

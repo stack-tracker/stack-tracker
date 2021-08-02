@@ -1,5 +1,4 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { GraphQLDate } = require('graphql-iso-date');
 const { Game, Index, User } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -61,8 +60,4 @@ const resolvers = {
 };
 
 
-const customDateResolver = {
-    Date: GraphQLDate
-};
-
-module.exports = { customDateResolver, resolvers} ;
+module.exports = { resolvers } ;
