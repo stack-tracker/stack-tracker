@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import {LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 function LoginForm() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const { email, password } = formState;
   
+  const [login, { error }] = useMutation(LOGIN);
+  
   function changeHandler(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   } 
   
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     console.log(formState)
-  }
+    try {
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
+      });
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+    } catch (err) {
+      console.log(err)
+    }
+  };
+  
   return (
     <>
       <form className="font-sans mx-auto w-96"  type="submit" onSubmit={submitHandler} >

@@ -7,6 +7,7 @@ import { ADD_USER } from '../../utils/mutations';
 function SignupForm() {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' });
   const { username, email, password } = formState;
+  const [AddUser] = useMutation(ADD_USER);
   
   function changeHandler(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -15,12 +16,17 @@ function SignupForm() {
   const submitHandler = async(e) => {
     e.preventDefault();
     console.log(formState)
-    const mutationResponse = await ADD_USER({
+    const mutationResponse = await addUser({
       variables: {
-        email: formState
-      }
-    })
-  }
+        email: formState.email,
+        username: formState.username,
+        password: formState.password
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  };
+
   return (
     <>
       <form className="font-sans mx-auto w-96"  type="submit" onSubmit={submitHandler} >
