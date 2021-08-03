@@ -34,8 +34,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="flex flex-col">
         <Router>
+        <div className="flex flex-col">
           <Header />
             <Switch>
               <Route exact path="/" component={Signup} />
@@ -44,8 +44,8 @@ function App() {
               <Route exact path="/locations" component={Locations} />
               <Route exact path="/addsession" component={AddSession} />
             </Switch>
+          </div>
         </Router>
-      </div>
     </ApolloProvider>
   );
 }
