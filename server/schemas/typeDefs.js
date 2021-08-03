@@ -3,7 +3,6 @@ const { gql } = require('apollo-server-express');
 // have set login to be by email, we can change if we want
 const typeDefs = gql`
 
-    scalar Date
 
     type User {
         _id: ID
