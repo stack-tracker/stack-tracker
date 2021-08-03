@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const GameSchema = require("./Game");
 
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
   username: {
@@ -25,21 +25,21 @@ const userSchema = new Schema({
 });
 
 // set up pre-save middleware to create password
-// userSchema.pre('save', async function(next) {
-//   if (this.isNew || this.isModified('password')) {
-//     const saltRounds = 10;
-//     this.password = await bcrypt.hash(this.password, saltRounds);
-//   }
+userSchema.pre('save', async function(next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
 
-//   next();
-// });
+  next();
+});
 
 
 // compare the incoming password with the hashed password
-// userSchema.methods.isCorrectPassword = async function (password) {
-//   console.log(this.password + " " + password);
-//   return bcrypt.compare(password, this.password);
-// };
+userSchema.methods.isCorrectPassword = async function (password) {
+  console.log(this.password + " " + password);
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model("User", userSchema);
 
