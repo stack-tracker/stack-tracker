@@ -15,10 +15,10 @@ const typeDefs = gql`
         _id: ID
         location: String
         hours: Int
-        small_blind: Int
-        big_blind: Int
+        small_blind: Float
+        big_blind: Float
         buy_in: Int
-        cash_out: Int
+        cash_out: Float
         date: String
         username: String
     }
@@ -38,7 +38,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         updateUser(username: String!, email: String!, password: String!): User
         login(email: String!, password: String!): Auth
-        addGame(gameId: ID!): User
+        addGame(userId: ID!, location: String!, hours: Int!, small_blind: Float!, big_blind: Float!, buy_in: Int!, cash_out: Float!, date: String!): User
     }
 `;
 

@@ -5,12 +5,12 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
-      // if (context.user) {
-        const user = await User.findById(context.user._id);
+      if (context.user) {
+        const user = await User.findById({ _id: context.user._id });
 
-        return user.games.id(_id);
-      // }
-      // throw new AuthenticationError("Not logged in");
+        return user;
+      }
+      throw new AuthenticationError("Not logged in");
     },
 
     games: async (parent, { username }) => {
@@ -60,20 +60,16 @@ const resolvers = {
 
       return { token, user };
     },
-    addGame: async (parent, args, context) => {
+    addGame: async (parent, { userId, ...args }, context) => {
       if (context.user) {
-        const game = await Game.create({
-          ...args,
-          username: context.user.username,
-        });
-
-        await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { games: game._id } },
-          { new: true }
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $push: { games: { ...args } } },
+          { new: true, runValidators: true }
+          
         );
 
-        return game;
+        return updatedUser;
       }
 
       throw new AuthenticationError(

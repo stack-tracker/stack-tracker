@@ -19,7 +19,7 @@ module.exports = {
 
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
-      console.log(data + " " + "authMiddleware- try catch");
+      // console.log(data + " " + "authMiddleware- try catch");
 
       req.user = data;
     } catch {
