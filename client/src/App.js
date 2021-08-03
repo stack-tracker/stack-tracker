@@ -22,11 +22,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-<<<<<<< HEAD
   const token = localStorage.getItem("id_token");
-=======
-  const token = localStorage.getItem('id_token');
->>>>>>> 0c9a2cd64c2a80b46a5a66e6b061a81cc93046cb
   return {
     headers: {
       ...headers,
@@ -46,7 +42,6 @@ function App() {
         <Router>
         <div className="flex flex-col">
           <Header />
-<<<<<<< HEAD
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
@@ -54,16 +49,7 @@ function App() {
             <Route exact path="/locations" component={Locations} />
             <Route exact path="/addsession" component={AddSession} />
           </Switch>
-=======
-            <Switch>
-              <Route exact path="/" component={Signup} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/charts" component={Charts} />
-              <Route exact path="/locations" component={Locations} />
-              <Route exact path="/addsession" component={AddSession} />
-            </Switch>
-          </div>
->>>>>>> 0c9a2cd64c2a80b46a5a66e6b061a81cc93046cb
+        </div>
         </Router>
     </ApolloProvider>
   );
