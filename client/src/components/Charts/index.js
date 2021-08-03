@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis, ReferenceLine, Bar } from 'recharts';
+
+// fetch user games array
+// deconstruct the array
 
 const Charts = () => {
     const sessions = [
@@ -58,6 +61,13 @@ const Charts = () => {
         {sessionDate: "7/30/2021", bbPerHour: 15, dollarsPerHour: 25},
         {sessionDate: "7/31/2021", bbPerHour: 8, dollarsPerHour: 25},
     ];
+
+
+
+    useEffect(()=> {
+        //make a call to the dv for the USer by Id 
+        //on that user mode l would be the games array with all the games 
+    })
 
     return (
         <div className="Charts">
