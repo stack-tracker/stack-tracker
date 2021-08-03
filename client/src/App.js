@@ -42,14 +42,14 @@ function App() {
         <Router>
         <div className="flex flex-col">
           <Header />
-            <Switch>
-              <Route exact path="/" component={Signup} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/charts" component={Charts} />
-              <Route exact path="/locations" component={Locations} />
-              <Route exact path="/addsession" component={AddSession} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact path="/" component={Signup} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/charts" component={Charts} />
+            <Route exact path="/locations" component={Locations} />
+            <Route exact path="/addsession" component={AddSession} />
+          </Switch>
+        </div>
         </Router>
     </ApolloProvider>
   );
