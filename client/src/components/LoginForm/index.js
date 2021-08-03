@@ -6,7 +6,7 @@ function LoginForm() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const { email, password } = formState;
   
-  const [login, { error }] = useMutation(LOGIN);
+  const [login] = useMutation(LOGIN);
   
   function changeHandler(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
