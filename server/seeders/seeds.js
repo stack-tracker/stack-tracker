@@ -14,10 +14,9 @@ db.once("open", async () => {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
-    const games = [{ location: "Madison", hours: "3" }];
+    const games = [{ location: faker.internet.userName(), hours: "3" }];
 
     userData.push({ username, email, password, games });
-    console.log(userData);
   }
 
   await User.collection.insertMany(userData);

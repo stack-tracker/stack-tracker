@@ -1,76 +1,84 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { Game, Index, User } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { Game, Index, User } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
-    Query: {
-        user: async (parent, args, context) => {
-            if (context.user) {
-                const user = await User.findById(context.user._id);
+  Query: {
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
 
-               return user.games.id(_id);
-            }
-            throw new AuthenticationError('Not logged in');
-        },
-
-        games: async (parent, { username }) => {
-            const params = username ? { username } : {};
-            return Game.find(params).sort({ date });
-        },
-
-        game: async (parent, { _id }) => {
-            return Game.findOne({ _id });
-        }
+        return user.games.id(_id);
+      }
+      throw new AuthenticationError("Not logged in");
     },
 
-    Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
-            const token = signToken(user);
+    games: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Game.find(params).sort({ date });
+    },
 
-            return { token, user };
-        },
-        updateUser: async (parent, args, context) => {
-            if (context.user) {
-                return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-            }
+    game: async (parent, { _id }) => {
+      return Game.findOne({ _id });
+    },
+  },
 
-            throw new AuthenticationError('Not logged in');
-        },
-        login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-            if (!user) {
-                throw new AuthenticationError('Incorrect Credentials');
-            }
+      return { token, user };
+    },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-            const correctPw = await user.isCorrectPassword(password);
+      throw new AuthenticationError("Not logged in");
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      console.log(user);
 
-            if (!correctPw) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
+      if (!user) {
+        throw new AuthenticationError("Incorrect Credentials");
+      }
 
-            const token = signToken(user);
+      const correctPw = await user.isCorrectPassword(password);
+      console.log(correctPw);
 
-            return { token, user };
-        },
-        addGame: async (parent, args, context) => {
-            if (context.user) {
-                const game = await Game.create({ ...args, username: context.user.username });
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-                await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { games: game._id } },
-                    { new: true }
-                );
+      const token = signToken(user);
 
-                return game;
-            }
+      return { token, user };
+    },
+    addGame: async (parent, args, context) => {
+      if (context.user) {
+        const game = await Game.create({
+          ...args,
+          username: context.user.username,
+        });
 
-            throw new AuthenticationError('You need to be logged in to add a session!');
-        }
-    }
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { games: game._id } },
+          { new: true }
+        );
+
+        return game;
+      }
+
+      throw new AuthenticationError(
+        "You need to be logged in to add a session!"
+      );
+    },
+  },
 };
-
 
 module.exports = resolvers;
