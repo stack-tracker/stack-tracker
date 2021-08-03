@@ -40,6 +40,9 @@ function AddSession() {
     }
 
     console.log(formState)
+
+    // fetch user by login Id
+    // push to user array of games
   }
 
   return (
