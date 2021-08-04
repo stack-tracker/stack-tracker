@@ -56,7 +56,7 @@ function AddSession() {
 
         <div className="grid grid-cols-1 my-5">
           <label className="text-2xl ml-3" htmlFor="hours">Hours:</label>
-          <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="number" step="1" min="1" max="10" defaultValue={hours} name="hours" onChange={changeHandler} />
+          <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="number" step=".1" min=".1" max="1000" defaultValue={hours} name="hours" onChange={changeHandler} />
         </div>
 
         <div className="grid grid-cols-1 my-5">

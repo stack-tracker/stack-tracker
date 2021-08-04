@@ -14,7 +14,7 @@ const typeDefs = gql`
     type Game {
         _id: ID
         location: String
-        hours: Int
+        hours: Float
         small_blind: Float
         big_blind: Float
         buy_in: Int
