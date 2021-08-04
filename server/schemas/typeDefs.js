@@ -21,6 +21,9 @@ const typeDefs = gql`
         cash_out: Float
         date: String
         username: String
+        result: Float
+        cash_per_hour: Float
+        bb_per_hour: Float
     }
 
     type Auth {
