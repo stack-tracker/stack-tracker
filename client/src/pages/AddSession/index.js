@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER_ID } from '../../utils/queries';
+import { QUERY_USER_BASIC } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { ADD_GAME } from '../../utils/mutations';
 
 const dollar = <FontAwesomeIcon icon={faDollarSign} />
 
 function AddSession() {
-
-  const { data } = useQuery(QUERY_USER_ID);
+  // returns user ID
+  const { data } = useQuery(QUERY_USER_BASIC);
 
   const [formState, setFormState] = useState(
     {
@@ -33,44 +33,41 @@ function AddSession() {
     big_blind,
     cash_out
   } = formState;
-    
-  function changeHandler(e) {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+
+  function changeHandler(e) { 
+    setFormState({ ...formState, [e.target.name]: e.target.value })   
   }
   
-  const [addGame, {error} ] = useMutation(ADD_GAME);
+  const [addGame, { loading, error} ] = useMutation(ADD_GAME);
 
+  if (loading) return 'Submitting...';
+  if(error) return `Submission error! ${error.message}`;
 
-    
-  function submitHandler(e) {
-    e.preventDefault();
-    // Parses all values except for date into integers;
-    for (const [key, value] of Object.entries(e)) {
-      if (key !== 'date') {
-        parseInt(value);
-      }
+  const submitHandler = async event => {
+    event.preventDefault();
+    // parse values into needed type
+    const variables = {
+      ...formState,
+      hours: parseInt(formState.hours),
+      buy_in: parseInt(formState.buy_in),
+      small_blind: parseFloat(formState.small_blind),
+      big_blind: parseFloat(formState.big_blind),
+      cash_out: parseFloat(formState.cash_out),
+      userId: data.user._id
     }
-    console.log(formState)
-    const variables = { ...formState, userId: data.user._id, username: data.user.username }
-    console.log(variables)
     
-    
-    addGame(variables)
-    .catch((res) => {
-      const errors = res.graphQLErrors.map((error) => {
-        return error.message;
-      })
-      // this.setState({errors});
-    });
-
-  
-    
+    try {
+      await addGame({variables});
+    }
+    catch (e) {
+      console.error(e);
+    }
   };
 
   return (
     <div className="grid grid-col-1 h-screen content-center">
       <span className="text-6xl text-gray-900 text-center pb-6">Add a Session!</span>
-      <form className="font-sans mx-auto w-96 border-4 border-gray-900 py-4 px-6"  type="submit" onSubmit={submitHandler} >
+      <form className="font-sans mx-auto w-96 border-4 border-gray-900 py-4 px-6"  type="submit" onSubmit={submitHandler}>
         <div className="grid grid-cols-1 my-5">
           <label className="text-2xl ml-3" htmlFor="date">Date:</label>
           <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="date" defaultValue={date} name="date" onChange={changeHandler} />
@@ -122,7 +119,7 @@ function AddSession() {
           <button className="py-1 font-sans text-gray-800 text-2xl bg-gray-300 w-2/6 ml-3 w-11/12">Submit</button>
         </div>
       </form>
-      {error && <span>Add session failed</span>}
+      {error && <span className="grid grid-cols-1 my-5 text-xl text-gray-900 text-center">Add session failed</span>}
     </div>
   )
 }

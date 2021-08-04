@@ -1,17 +1,12 @@
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER} from '../../utils/queries';
-
-
-
+import { QUERY_USER_BASIC} from '../../utils/queries';
 
 function Dashboard() {
 
-    const { loading, data } = useQuery(QUERY_USER);
-    console.log(data)
-    
-    
+  const { loading, data } = useQuery(QUERY_USER_BASIC);
+  console.log(data)
   
   return(
     <div className="grid gap-6 grid-cols-3 h-screen">

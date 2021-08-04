@@ -20,7 +20,6 @@ const typeDefs = gql`
         buy_in: Int
         cash_out: Float
         date: String
-        username: String
         result: Float
         cash_per_hour: Float
         bb_per_hour: Float
