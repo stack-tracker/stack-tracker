@@ -54,7 +54,7 @@ gameSchema.virtual("cash_per_hour").get(function () {
 });
 
 gameSchema.virtual("bb_per_hour").get(function () {
-  const bbPerHour = this.cash_per_hour / this.big_blind / this.hours;
+  const bbPerHour = this.result / this.big_blind / this.hours;
   return bbPerHour;
 });
 
