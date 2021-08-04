@@ -48,16 +48,18 @@ function AddSession() {
     // parse values into needed type
     const variables = {
       ...formState,
-      hours: parseInt(formState.hours),
+      hours: parseFloat(formState.hours),
       buy_in: parseInt(formState.buy_in),
       small_blind: parseFloat(formState.small_blind),
       big_blind: parseFloat(formState.big_blind),
       cash_out: parseFloat(formState.cash_out),
-      userId: data.user._id
+      userId: data.user._id,
+      username: data.user.username
     }
     
     try {
       await addGame({variables});
+      window.location.assign('/dashboard')
     }
     catch (e) {
       console.error(e);
