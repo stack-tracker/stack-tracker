@@ -45,17 +45,17 @@ const gameSchema = new Schema(
 
 gameSchema.virtual("result").get(function () {
   const result = this.cash_out - this.buy_in;
-  return result;
+  return result.toFixed(2);
 });
 
 gameSchema.virtual("cash_per_hour").get(function () {
   const cashPerHour = this.result / this.hours;
-  return cashPerHour;
+  return cashPerHour.toFixed(2);
 });
 
 gameSchema.virtual("bb_per_hour").get(function () {
   const bbPerHour = this.result / this.big_blind / this.hours;
-  return bbPerHour;
+  return bbPerHour.toFixed(2);
 });
 
 module.exports = gameSchema;
