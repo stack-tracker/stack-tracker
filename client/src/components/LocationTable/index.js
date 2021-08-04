@@ -1,18 +1,47 @@
 import React from 'react';
 
 function LocationTable(props) {
-  const { user, locationState } = props;
-
+  const { games, locationState } = props;
+  
+  // getLocationData() returns an array of games from selected location
+  /* 
+    looks like:
+    [
+      {
+        bb_per_hour,
+        big_blind,
+        small_blind,
+        location,
+        buy_in,
+        cash_out,
+        result,
+        date,
+        hours,
+        cash_per_hour,
+      }, 
+      {
+        ...
+      }
+    ]
+  */
   function getLocationData() {
-    var result = user.games.filter(game => {
+    var result = games.filter(game => {
       return game.location === locationState;
     });
+    console.log(result);
     return result;
   }
 
 
   let locationData = getLocationData();
-  console.log(locationData);
+
+  if(!locationState) {
+    return(
+      <div className="col-span-2 self-center text-4xl text-gray-900">
+        Select a Location!
+      </div>
+    )
+  }
   
   return(
     <div className="col-span-2 self-center">

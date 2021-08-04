@@ -78,28 +78,30 @@ import Signup from '../../pages/Signup';
   
   
 function Locations() {
+  const [locationState, setLocationState] = useState('');
   const { loading, data } = useQuery(QUERY_USER);
-    console.log(data)
+  console.log(data)
 
   function getLocations() {
+    if(loading) {
+      return "loading"
+    }
+    // maps over user.games and returns an array of just the locations
     const locationsArr = data.user.games.map(game => {
-      return game.location;
+    return game.location;
     });
-  
-  // removes duplicate locations
-  const uniqueLocations = [...new Set(locationsArr)];
+    // returns an array of unique locations
+    const uniqueLocations = [...new Set(locationsArr)];
     return uniqueLocations;
   };
-
-  const locations = getLocations();
-  
-  const [locationState, setLocationState] = useState('');
- 
+   
   if (Auth.loggedIn()) {
-    return (
+    const locations = getLocations();
+    console.log(locationState)
+    return(
       <div className="grid gap-6 grid-cols-3 h-screen">
-        <LocationsBar locations={locations} locationState={locationState} setLocationState={setLocationState} />
-        { locationState !== '' && loading ? <span>Loading</span> : <LocationTable user={ data.user } locationState={locationState} /> }
+        { !loading && <LocationsBar locations={locations} locationState={locationState} setLocationState={setLocationState} /> }
+        { loading ? <span>Loading...</span> : <LocationTable locationState={locationState} games={data.user.games} /> }
       </div>
   ) } else {
   return (
