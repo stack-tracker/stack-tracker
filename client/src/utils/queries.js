@@ -19,3 +19,12 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_USER_ID = gql`
+  {
+    user {
+      _id
+      username
+    }
+  }
+`;

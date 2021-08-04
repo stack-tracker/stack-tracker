@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER_ID } from '../../utils/queries';
+import { useMutation } from '@apollo/client';
+import { ADD_GAME } from '../../utils/mutations';
 
 const dollar = <FontAwesomeIcon icon={faDollarSign} />
 
 function AddSession() {
 
+  const { data } = useQuery(QUERY_USER_ID);
+
   const [formState, setFormState] = useState(
     {
+      location: '',
       date: '',
       hours: 1,
       buy_in: 1,
@@ -19,6 +26,7 @@ function AddSession() {
 
   const {
     date,
+    location,
     hours,
     buy_in,
     small_blind,
@@ -28,7 +36,11 @@ function AddSession() {
     
   function changeHandler(e) {
     setFormState({ ...formState, [e.target.name]: e.target.value });
-  } 
+  }
+  
+  const [addGame, {error} ] = useMutation(ADD_GAME);
+
+
     
   function submitHandler(e) {
     e.preventDefault();
@@ -38,12 +50,22 @@ function AddSession() {
         parseInt(value);
       }
     }
-
     console.log(formState)
+    const variables = { ...formState, userId: data.user._id, username: data.user.username }
+    console.log(variables)
+    
+    
+    addGame(variables)
+    .catch((res) => {
+      const errors = res.graphQLErrors.map((error) => {
+        return error.message;
+      })
+      // this.setState({errors});
+    });
 
-    // fetch user by login Id
-    // push to user array of games
-  }
+  
+    
+  };
 
   return (
     <div className="grid grid-col-1 h-screen content-center">
@@ -55,8 +77,13 @@ function AddSession() {
         </div>
 
         <div className="grid grid-cols-1 my-5">
+          <label className="text-2xl ml-3" htmlFor="date">Location:</label>
+          <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="text" defaultValue={location} name="location" onChange={changeHandler} />
+        </div>
+
+        <div className="grid grid-cols-1 my-5">
           <label className="text-2xl ml-3" htmlFor="hours">Hours:</label>
-          <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="number" step="1" min="1" max="10" defaultValue={hours} name="hours" onChange={changeHandler} />
+          <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-3" type="number" step="0.1" min="1" max="10" defaultValue={hours} name="hours" onChange={changeHandler} />
         </div>
 
         <div className="grid grid-cols-1 my-5">
@@ -87,7 +114,7 @@ function AddSession() {
           <label className="text-2xl col-span-2 ml-3" htmlFor="cash_out">Cash Out:</label>
           <div>
             <span className="text-xl">{dollar}</span>
-            <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-1 " type="number" step="0.01" min="0.01" name="cash_out" defaultValue={cash_out} onChange={changeHandler} />
+            <input className="py-1 text-xl bg-blue-50 border-gray-400 w-11/12 ml-1 " type="number" step="0.01" min="-10000000000.00" name="cash_out" defaultValue={cash_out} onChange={changeHandler} />
           </div>
         </div>
     
@@ -95,6 +122,7 @@ function AddSession() {
           <button className="py-1 font-sans text-gray-800 text-2xl bg-gray-300 w-2/6 ml-3 w-11/12">Submit</button>
         </div>
       </form>
+      {error && <span>Add session failed</span>}
     </div>
   )
 }

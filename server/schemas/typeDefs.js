@@ -14,13 +14,16 @@ const typeDefs = gql`
     type Game {
         _id: ID
         location: String
-        hours: Int
+        hours: Float
         small_blind: Float
         big_blind: Float
         buy_in: Int
         cash_out: Float
         date: String
         username: String
+        result: Float
+        cash_per_hour: Float
+        bb_per_hour: Float
     }
 
     type Auth {

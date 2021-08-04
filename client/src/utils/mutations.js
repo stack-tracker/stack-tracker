@@ -29,3 +29,36 @@ export const ADD_USER = gql`
       }
     }
 `;
+
+export const ADD_GAME = gql`
+  mutation addGame(
+    $userId: ID!
+    $location: String!
+    $hours: Float!
+    $small_blind: Float!
+    $big_blind: Float!
+    $buy_in: Int!
+    $cash_out: Float!
+    $date: String!
+    $username: String!
+  ) {
+    addGame(
+      userId: $userId
+      location: $location
+      hours: $hours
+      small_blind: $small_blind
+      big_blind: $big_blind
+      buy_in: $buy_in
+      cash_out: $cash_out
+      date: $date
+      username: $username
+    ) {
+      user {
+        _id
+        games {
+          location
+        }
+      }
+    }
+  }
+`;
