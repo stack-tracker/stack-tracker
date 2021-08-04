@@ -4,6 +4,9 @@ import LocationTable from '../../components/LocationTable';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER} from '../../utils/queries';
 
+import Auth from '../../utils/auth';
+import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import Signup from '../../pages/Signup';
 
 // const user = {
 //     username: 'pokrGuy93',
@@ -92,12 +95,18 @@ function Locations() {
   
   const [locationState, setLocationState] = useState('');
  
-    return(
+  if (Auth.loggedIn()) {
+    return (
       <div className="grid gap-6 grid-cols-3 h-screen">
         <LocationsBar locations={locations} locationState={locationState} setLocationState={setLocationState} />
         { locationState !== '' && loading ? <span>Loading</span> : <LocationTable user={ data.user } locationState={locationState} /> }
       </div>
-  )
-}
+  ) } else {
+  return (
+    <Route>
+      <Redirect to="/" /> : <Signup />
+    </Route>
+  )}
+};
 
 export default Locations;
