@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis, ReferenceLine, Bar } from 'recharts';
+import Auth from '../../utils/auth';
+import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import Signup from '../../pages/Signup'
 
 // fetch user games array
 // deconstruct the array
@@ -68,72 +71,77 @@ const Charts = () => {
         //make a call to the dv for the USer by Id 
         //on that user mode l would be the games array with all the games 
     })
-
-    return (
-        <div className="Charts">
-            <h1>Overview</h1>
-            <h2>Total Bankroll</h2>
-            <LineChart
-                width={500}
-                height={300}
-                data={bankroll}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="sessionDate" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
-            </LineChart>
-            <h2>Individual Sessions</h2>
-            <BarChart
-                width={500}
-                height={300}
-                data={sessions}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="sessionDate" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="profit" fill="#82ca9d" />
-            </BarChart>
-            <h2>bb/Hour</h2>
-            <LineChart
-                width={500}
-                height={300}
-                data={bbPerHour}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="sessionDate" />
-                <YAxis yAxisId="left" />
-          <YAxis yAxisId="right" orientation="right" />
-          <Tooltip />
-          <Legend />
-          <Line yAxisId="left" type="monotone" dataKey="bbPerHour" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line yAxisId="right" type="monotone" dataKey="dollarsPerHour" stroke="#82ca9d" />
-            </LineChart>
-        </div>
-    )
-}
+        if (Auth.loggedIn()) {
+        return (
+            <div className="Charts">
+                <h1>Overview</h1>
+                <h2>Total Bankroll</h2>
+                <LineChart
+                    width={500}
+                    height={300}
+                    data={bankroll}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="sessionDate" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
+                </LineChart>
+                <h2>Individual Sessions</h2>
+                <BarChart
+                    width={500}
+                    height={300}
+                    data={sessions}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="sessionDate" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <ReferenceLine y={0} stroke="#000" />
+                    <Bar dataKey="profit" fill="#82ca9d" />
+                </BarChart>
+                <h2>bb/Hour</h2>
+                <LineChart
+                    width={500}
+                    height={300}
+                    data={bbPerHour}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="sessionDate" />
+                    <YAxis yAxisId="left" />
+            <YAxis yAxisId="right" orientation="right" />
+            <Tooltip />
+            <Legend />
+            <Line yAxisId="left" type="monotone" dataKey="bbPerHour" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line yAxisId="right" type="monotone" dataKey="dollarsPerHour" stroke="#82ca9d" />
+                </LineChart>
+            </div>
+        )} else {
+            return (
+                <Route>
+                    <Redirect to="/" /> : <Signup />
+                </Route>
+    )}
+} 
 
 export default Charts;

@@ -11,9 +11,6 @@ function SideBar() {
 
   return (
     <ul className="text-4xl w-80 ml-10 py-10 border-8 border-gray-900 text-center self-center">
-      <li className="py-10">
-        <button className="hover:text-gray-600 transform hover:scale-110 duration-75">Overview</button>
-      </li>
       <li className="py-10 ">
         <button className="hover:text-gray-600 transform hover:scale-110 duration-75">Sessions</button>
       </li>

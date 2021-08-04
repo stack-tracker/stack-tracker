@@ -9,7 +9,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 
-import Auth from './utils/auth';
+// import Auth from './utils/auth';
 
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
@@ -40,25 +40,13 @@ const client = new ApolloClient({
 
 function App() {
 
-  if (Auth.loggedIn()) {
-    return (
-      <ApolloProvider client={client}>
-        <Router>
-          <div className="flex flex-col">
-            <Header />
-              <Route exact path="/" component={Signup} />
-          </div>
-        </Router>
-      </ApolloProvider>
-    )
-  } else {
-
   return (
     <ApolloProvider client={client}>
         <Router>
         <div className="flex flex-col">
           <Header />
           <Switch>
+            <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard:username?" component={Dashboard} />
             <Route exact path="/charts" component={Charts} />
             <Route exact path="/locations" component={Locations} />
@@ -69,6 +57,5 @@ function App() {
     </ApolloProvider>
   );
 }
-};
 
 export default App;
