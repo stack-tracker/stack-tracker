@@ -9,7 +9,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 
-// import Auth from './utils/auth';
 
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
