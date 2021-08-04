@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+
+import Auth from '../../utils/auth';
+import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import Signup from '../../pages/Signup';
 
 const dollar = <FontAwesomeIcon icon={faDollarSign} />
 
@@ -44,6 +48,8 @@ function AddSession() {
     // fetch user by login Id
     // push to user array of games
   }
+
+  if (Auth.loggedIn()) {
 
   return (
     <div className="grid grid-col-1 h-screen content-center">
@@ -96,7 +102,12 @@ function AddSession() {
         </div>
       </form>
     </div>
-  )
-}
+  ) } else {
+    return (
+      <Route>
+        <Redirect to="/" /> : <Signup />
+      </Route>
+    )}
+};
 
 export default AddSession;
