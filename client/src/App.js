@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Locations from "./pages/Locations";
 import AddSession from "./pages/AddSession";
+import Sessions from "./pages/Sessions";
 
 import Header from "./components/Header";
 import Charts from "./components/Charts";
@@ -54,6 +55,7 @@ function App() {
             <Route exact path="/charts" component={Charts} />
             <Route exact path="/locations" component={Locations} />
             <Route exact path="/addsession" component={AddSession} />
+            <Route exact path="/sessions" component={Sessions} />
           </Switch>
         </div>
         </Router>
