@@ -29,7 +29,7 @@ function LocationTable(props) {
     var result = games.filter(game => {
       return game.location === locationState;
     });
-    console.log(result);
+    // console.log(result);
     return result;
   }
 
@@ -43,13 +43,60 @@ function LocationTable(props) {
       </div>
     )
   }
+
+  function sumResult() {
+    const locationData = getLocationData();
+    console.log(locationData);
+    let sum = 0;
+    for(let i=0; i<locationData.length; i++) {
+      sum += locationData[i].result;
+      console.log(sum);
+    }
+    return sum;
+  }
+
+  function meanCashPerHour() {
+    const locationData = getLocationData();
+    let mean = 0;
+    for (let i=0; i<locationData.length; i++) {
+      mean += locationData[i].cash_per_hour / locationData.length;
+    }
+    return mean.toFixed(2);
+  }
+
+  function meanBigBlindPerHour() {
+    const locationData = getLocationData();
+    let mean = 0;
+    for (let i=0; i<locationData.length; i++) {
+      mean += locationData[i].bb_per_hour / locationData.length;
+    }
+    return mean.toFixed(2);
+  }
+  
+  const resultSum = sumResult();
+  const meanCph = meanCashPerHour();
+  const meanBbph = meanBigBlindPerHour();
   
   return(
     <div className="col-span-2 self-center">
       <div className="mb-4 py-6 text-gray-900">
 
-        <span className="text-6xl">{locationState}</span>
+        <span className="font-serif text-6xl">{locationState}</span>
       </div>
+
+      <table className="p-4 mb-4 self-center">
+        <thead>
+          <tr className="border-r-4 border-t-4 border-b-4 border-gray-900">
+            <th className="border-2 border-gray-900 p-3">Bankroll:</th>
+            <td className="border-2 border-gray-900 p-3">${resultSum}</td>
+            <th className="border-2 border-gray-900 p-3 ">Average Cash per Hour:</th>
+            <td className="border-2 border-gray-900 p-3">${meanCph}</td>
+            <th className="border-2 border-gray-900 p-3 ">Average Big Blinds per Hour:</th>
+            <td className="border-2 border-gray-900 p-3">{meanBbph}</td>
+          </tr>
+        </thead>
+      </table>
+
       <table className="p-4">
         <thead className="border-t-4 border-b-2 border-gray-900 text-xl text-gray-900">
           <tr>
