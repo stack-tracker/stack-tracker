@@ -11,7 +11,6 @@ function Dashboard() {
   const { loading, data } = useQuery(QUERY_USER_BASIC);
 
   if (Auth.loggedIn()) {
-    console.log(data);
     return (
       <div className="h-screen flex flex-col-reverse md:flex-row justify-center item-center text-center mt-20 flex-col">
         <Sidebar />

@@ -1,134 +1,165 @@
-import React, { useEffect } from 'react';
-import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis, ReferenceLine, Bar } from 'recharts';
-import Auth from '../../utils/auth';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
-import Signup from '../../pages/Signup'
-import { QUERY_USER } from '../../utils/queries';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import {
+  LineChart,
+  Line,
+  Legend,
+  Tooltip,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ReferenceLine,
+  Bar,
+} from "recharts";
+import Auth from "../../utils/auth";
+import { BrowserRouter as Route, Redirect } from "react-router-dom";
+import Signup from "../../pages/Signup";
+import { QUERY_USER } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
 const Charts = () => {
-    const { loading, data } = useQuery(QUERY_USER);
-    if (loading || !data) {
-        return (
-          null
-        )
-      }
+  const { loading, data } = useQuery(QUERY_USER);
+  if (loading || !data) {
+    return null;
+  }
 
-    let arrayBarGraph = data.user.games;
-    let arrayLineGraph = data.user.games;
-    let sessions = [];
-    let totalResult;
-    let lineBankroll = [];
-    let newArray = [];
-    
-    arrayBarGraph.map(games => {
-        sessions.push({sessionDate: games.date, profit: games.result})
-    })
+  let sessionData = data.user.games;
+  let arrayBarGraph = sessionData;
+  let sessions = [];
+  let resultsArr = [];
 
-    const accumulate = arr => arr.map((sum => value => sum += value)(0));
+  sessionData = sessionData
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date));
 
-    console.log(accumulate(newArray));
+  arrayBarGraph.map((games) => {
+    sessions.push({ sessionDate: games.date, profit: games.result });
+  });
 
-    arrayLineGraph.map(games => {
-        newArray.push(games.result);
-        let superNewArray = accumulate(newArray);
-        lineBankroll.push({sessionDate: games.date, bankroll: superNewArray })
-        console.log(accumulate(newArray));
-    })
-    
+  //pushing the reuslt value into resultsArr so we can add them up
+  for (let i = 0; i < data.user.games.length; i++) {
+    resultsArr.push(data.user.games[i].result);
+  }
 
-    const bbPerHour = [
-        {sessionDate: "7/5/2021", bbPerHour: 5, dollarsPerHour: 15},
-        {sessionDate: "7/8/2021", bbPerHour: 8, dollarsPerHour: 25},
-        {sessionDate: "7/12/2021", bbPerHour: 6, dollarsPerHour: 17},
-        {sessionDate: "7/15/2021", bbPerHour: 12, dollarsPerHour: 8},
-        {sessionDate: "7/16/2021", bbPerHour: 4, dollarsPerHour: 12},
-        {sessionDate: "7/19/2021", bbPerHour: 6, dollarsPerHour: 18},
-        {sessionDate: "7/20/2021", bbPerHour: 12, dollarsPerHour: 12},
-        {sessionDate: "7/21/2021", bbPerHour: 15, dollarsPerHour: 11},
-        {sessionDate: "7/22/2021", bbPerHour: 2, dollarsPerHour: 22},
-        {sessionDate: "7/23/2021", bbPerHour: 7, dollarsPerHour: 30},
-        {sessionDate: "7/24/2021", bbPerHour: 3, dollarsPerHour: 25},
-        {sessionDate: "7/25/2021", bbPerHour: -5, dollarsPerHour: 14},
-        {sessionDate: "7/28/2021", bbPerHour: -10, dollarsPerHour: 25},
-        {sessionDate: "7/29/2021", bbPerHour: 10, dollarsPerHour: 14},
-        {sessionDate: "7/30/2021", bbPerHour: 15, dollarsPerHour: 25},
-        {sessionDate: "7/31/2021", bbPerHour: 8, dollarsPerHour: 25},
-    ];
+  //implementing an accumulator function to add up all the values for the results of each game
+  resultsArr = resultsArr.map((result, i) =>
+    resultsArr.slice(0, i + 1).reduce((a, b) => a + b)
+  );
 
-        if (Auth.loggedIn()) {
-        return (
-            <div className="Charts p-6 text-gray-800">
-                <h1 className="font-bold text-4xl text-center">Chart Overview</h1>
-                <h2 className="p-4 pl-52 text-lg">Total Bankroll</h2>
-                <LineChart
-                    width={500}
-                    height={300}
-                    data={lineBankroll}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="sessionDate" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
+  let lineBankroll = sessionData.map((game, i) => {
+    return { sessionDate: game.date, bankroll: resultsArr[i] };
+  });
 
-                    <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
-                </LineChart>
-                <h2 className="p-4 pl-52 text-lg">Individual Sessions</h2>
-                <BarChart
-                    width={500}
-                    height={300}
-                    data={sessions}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="sessionDate" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
+  const bbPerHour = [
+    { sessionDate: "7/5/2021", bbPerHour: 5, dollarsPerHour: 15 },
+    { sessionDate: "7/8/2021", bbPerHour: 8, dollarsPerHour: 25 },
+    { sessionDate: "7/12/2021", bbPerHour: 6, dollarsPerHour: 17 },
+    { sessionDate: "7/15/2021", bbPerHour: 12, dollarsPerHour: 8 },
+    { sessionDate: "7/16/2021", bbPerHour: 4, dollarsPerHour: 12 },
+    { sessionDate: "7/19/2021", bbPerHour: 6, dollarsPerHour: 18 },
+    { sessionDate: "7/20/2021", bbPerHour: 12, dollarsPerHour: 12 },
+    { sessionDate: "7/21/2021", bbPerHour: 15, dollarsPerHour: 11 },
+    { sessionDate: "7/22/2021", bbPerHour: 2, dollarsPerHour: 22 },
+    { sessionDate: "7/23/2021", bbPerHour: 7, dollarsPerHour: 30 },
+    { sessionDate: "7/24/2021", bbPerHour: 3, dollarsPerHour: 25 },
+    { sessionDate: "7/25/2021", bbPerHour: -5, dollarsPerHour: 14 },
+    { sessionDate: "7/28/2021", bbPerHour: -10, dollarsPerHour: 25 },
+    { sessionDate: "7/29/2021", bbPerHour: 10, dollarsPerHour: 14 },
+    { sessionDate: "7/30/2021", bbPerHour: 15, dollarsPerHour: 25 },
+    { sessionDate: "7/31/2021", bbPerHour: 8, dollarsPerHour: 25 },
+  ];
 
-                    <ReferenceLine y={0} stroke="#000" />
-                    <Bar dataKey="profit" fill="#82ca9d" />
-                </BarChart>
-                <h2 className="p-4 pl-48 text-lg">Big Blinds Per Hour</h2>
-                <LineChart
-                    width={500}
-                    height={300}
-                    data={bbPerHour}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="sessionDate" />
-                    <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="left" type="monotone" dataKey="bbPerHour" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line yAxisId="right" type="monotone" dataKey="dollarsPerHour" stroke="#82ca9d" />
-                </LineChart>
-            </div>
-        )} else {
-            return (
-                <Route>
-                    <Redirect to="/" /> : <Signup />
-                </Route>
-    )}
-} 
+  if (Auth.loggedIn()) {
+    return (
+      <div className="Charts p-6 text-gray-800">
+        <h1 className="font-bold text-4xl text-center">Chart Overview</h1>
+        <h2 className="p-4 pl-52 text-lg">Total Bankroll</h2>
+        <LineChart
+          width={500}
+          height={300}
+          data={lineBankroll}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="sessionDate" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+
+          <Line
+            type="monotone"
+            dataKey="bankroll"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+        <h2 className="p-4 pl-52 text-lg">Individual Sessions</h2>
+        <BarChart
+          width={500}
+          height={300}
+          data={sessions}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="sessionDate" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+
+          <ReferenceLine y={0} stroke="#000" />
+          <Bar dataKey="profit" fill="#82ca9d" />
+        </BarChart>
+        <h2 className="p-4 pl-48 text-lg">Big Blinds Per Hour</h2>
+        <LineChart
+          width={500}
+          height={300}
+          data={bbPerHour}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="sessionDate" />
+          <YAxis yAxisId="left" />
+          <YAxis yAxisId="right" orientation="right" />
+          <Tooltip />
+          <Legend />
+          <Line
+            yAxisId="left"
+            type="monotone"
+            dataKey="bbPerHour"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+          <Line
+            yAxisId="right"
+            type="monotone"
+            dataKey="dollarsPerHour"
+            stroke="#82ca9d"
+          />
+        </LineChart>
+      </div>
+    );
+  } else {
+    return (
+      <Route>
+        <Redirect to="/" /> : <Signup />
+      </Route>
+    );
+  }
+};
 
 export default Charts;

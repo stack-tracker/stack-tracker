@@ -9,13 +9,11 @@ import {
   createHttpLink,
 } from "@apollo/client";
 
-
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Locations from "./pages/Locations";
 import AddSession from "./pages/AddSession";
 import Sessions from "./pages/Sessions";
-
 import Header from "./components/Header";
 import Charts from "./components/Charts";
 
@@ -38,12 +36,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   onError: (e) => {
     console.log(e);
-  }
+  },
 });
 
-
 function App() {
-
   return (
     <ApolloProvider client={client}>
         <Router>
@@ -58,7 +54,7 @@ function App() {
             <Route exact path="/sessions" component={Sessions} />
           </Switch>
         </div>
-        </Router>
+      </Router>
     </ApolloProvider>
   );
 }

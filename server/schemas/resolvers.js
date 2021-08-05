@@ -7,7 +7,6 @@ const resolvers = {
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById({ _id: context.user._id });
-
         return user;
       }
       throw new AuthenticationError("Not logged in");
@@ -25,9 +24,7 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
-      console.log(args + " " + "addUsers args");
       const user = await User.create(args);
-      console.log(user + " " + "addUser");
       const token = signToken(user);
 
       return { token, user };
@@ -43,19 +40,19 @@ const resolvers = {
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-      console.log(user);
 
       if (!user) {
         throw new AuthenticationError("Incorrect Credentials");
       }
 
+      //check to see if the password the user entered matches the one in the database
       const correctPw = await user.isCorrectPassword(password);
-      console.log(correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
 
+      //add the token to jsonwebtoken
       const token = signToken(user);
 
       return { token, user };
