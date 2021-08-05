@@ -14,30 +14,28 @@ function Sessions() {
     }
 
   function sumResult() {
-    console.log(data.user.games);
+    let sum = 0;
     for(let i=0; i<data.user.games.length; i++) {
-      let sum = 0;
       sum += data.user.games[i].result;
-      return sum;
     }
+    return sum;
+
   }
 
   function meanCashPerHour() {
+    let mean = 0;
     for(let i=0; i<data.user.games.length; i++) {
-      let mean = 0;
-      mean = data.user.games[i].cash_per_hour / data.user.games.length;
-      
-      return mean.toFixed(2);
+      mean += data.user.games[i].cash_per_hour / data.user.games.length;
     }
+    return mean.toFixed(2);
   }
 
   function meanBbPerHour() {
+    let mean = 0;
     for(let i=0; i<data.user.games.length; i++) {
-      let mean = 0;
-      mean = data.user.games[i].bb_per_hour / data.user.games.length;
-
-      return mean.toFixed(2);
+      mean += data.user.games[i].bb_per_hour / data.user.games.length;
     }
+    return mean.toFixed(2);
   }
 
   const meanBbph = meanBbPerHour();
