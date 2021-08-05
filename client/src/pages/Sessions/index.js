@@ -56,7 +56,7 @@ function Sessions() {
             <th className="border-2 border-gray-900 p-3 ">Average Cash per Hour:</th>
             <td className="border-2 border-gray-900 p-3">${meanCph}</td>
             <th className="border-2 border-gray-900 p-3 ">Average Big Blinds per Hour:</th>
-            <td className="border-2 border-gray-900 p-3">${meanBbph}</td>
+            <td className="border-2 border-gray-900 p-3">{meanBbph}</td>
           </tr>
         </thead>
       </table>
