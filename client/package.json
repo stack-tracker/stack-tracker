@@ -22,7 +22,8 @@
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "recharts": "^2.0.10",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   },
   "scripts": {
     "start": "react-scripts start && craco start",
@@ -50,7 +51,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
-    "postcss": "^7.0.36",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+    "postcss": "^7.0.36"
   }
 }
