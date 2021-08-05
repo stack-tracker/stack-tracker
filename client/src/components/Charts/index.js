@@ -58,9 +58,9 @@ const Charts = () => {
 
         if (Auth.loggedIn()) {
         return (
-            <div className="Charts">
-                <h1>Overview</h1>
-                <h2>Total Bankroll</h2>
+            <div className="Charts p-6 text-gray-800">
+                <h1 className="font-bold text-4xl text-center">Chart Overview</h1>
+                <h2 className="p-4 pl-52 text-lg">Total Bankroll</h2>
                 <LineChart
                     width={500}
                     height={300}
@@ -77,9 +77,10 @@ const Charts = () => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
+
                     <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
-                <h2>Individual Sessions</h2>
+                <h2 className="p-4 pl-52 text-lg">Individual Sessions</h2>
                 <BarChart
                     width={500}
                     height={300}
@@ -96,10 +97,11 @@ const Charts = () => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
+
                     <ReferenceLine y={0} stroke="#000" />
                     <Bar dataKey="profit" fill="#82ca9d" />
                 </BarChart>
-                <h2>bb/Hour</h2>
+                <h2 className="p-4 pl-48 text-lg">Big Blinds Per Hour</h2>
                 <LineChart
                     width={500}
                     height={300}
