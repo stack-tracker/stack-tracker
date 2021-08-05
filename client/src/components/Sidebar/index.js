@@ -7,7 +7,7 @@ const plus = <FontAwesomeIcon icon={faPlus} />;
 function SideBar() {
   return (
     <div className="flex">
-      <ul className="text-4xl w-80 ml-10 py-10 border-8 border-gray-900 text-center self-center flex-auto">
+      <ul className="text-4xl w-80 m-8 py-10 border-8 border-gray-900 text-center self-center flex-auto">
         <li className="py-10 ">
           <Link to={'/sessions'}>
             <button className="hover:text-gray-600 transform hover:scale-110 duration-75">

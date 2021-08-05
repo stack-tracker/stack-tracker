@@ -13,7 +13,7 @@ function Dashboard() {
   if (Auth.loggedIn()) {
     console.log(data);
     return (
-      <div className="grid gap-6 grid-cols-3 h-screen flex">
+      <div className="h-screen flex flex-col-reverse md:flex-row justify-center item-center text-center mt-20 flex-col">
         <Sidebar />
         <span className="text-6xl text-gray-900 leading-normal col-span-2 self-center place-self-start mx-12 flex-auto">
           {loading

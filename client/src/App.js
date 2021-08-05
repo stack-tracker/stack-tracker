@@ -47,7 +47,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
         <Router>
-        <div className="flex flex-col">
+        <div className="block overflow-x-hidden m-0 p-0">
           <Header />
           <Switch>
             <Route exact path="/" component={Signup} />
