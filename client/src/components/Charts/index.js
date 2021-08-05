@@ -15,24 +15,27 @@ const Charts = () => {
       }
 
     let arrayBarGraph = data.user.games;
+    let arrayLineGraph = data.user.games;
     let sessions = [];
-    let lineBankroll = [];
     let totalResult;
+    let lineBankroll = [];
     let newArray = [];
     
     arrayBarGraph.map(games => {
         sessions.push({sessionDate: games.date, profit: games.result})
-        lineBankroll.push({sessionDate: games.date, bankroll: totalResult})
-        newArray.push(games.result);
     })
 
-    console.log(newArray);
-    function accumulate (arr) {
-        arr.map((sum => value => sum += value)(0));
-        return arr;
-    }
+    const accumulate = arr => arr.map((sum => value => sum += value)(0));
+
     console.log(accumulate(newArray));
 
+    arrayLineGraph.map(games => {
+        newArray.push(games.result);
+        let superNewArray = accumulate(newArray);
+        lineBankroll.push({sessionDate: games.date, bankroll: superNewArray })
+        console.log(accumulate(newArray));
+    })
+    
 
     const bbPerHour = [
         {sessionDate: "7/5/2021", bbPerHour: 5, dollarsPerHour: 15},
