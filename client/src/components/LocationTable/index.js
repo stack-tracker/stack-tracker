@@ -44,6 +44,9 @@ function LocationTable(props) {
     )
   }
 
+  
+  locationData = locationData.slice().sort( (a,b) => b.date.localeCompare(a.date) )
+
   function sumResult() {
     const locationData = getLocationData();
     console.log(locationData);

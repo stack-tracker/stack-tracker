@@ -12,6 +12,9 @@ function Sessions() {
         null
       )
     }
+  
+  let sessionData = data.user.games;
+  sessionData = sessionData.slice().sort( (a,b) => b.date.localeCompare(a.date) )
 
   function sumResult() {
     let sum = 0;
@@ -75,7 +78,7 @@ function Sessions() {
           </tr>
         </thead>
         <tbody className="border-l-4 border-r-4 border-b-4 border-gray-900 text-lg text-gray-900">
-        {data.user.games.map((game, i) => (
+        {sessionData.map((game, i) => (
           <tr key={i} className="border-b-2 border-gray-900">
             <td className="border-l-2 border-gray-900 p-3">{game.date}</td>
             <td className="border-l-2 border-gray-900 p-3">{game.location}</td>
