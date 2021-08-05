@@ -18,7 +18,7 @@ function Dashboard() {
         <span className="text-6xl text-gray-900 leading-normal col-span-2 self-center place-self-start mx-12 flex-auto">
           {loading
             ? "Hello"
-            : `Welcome to your dashboard,  ${data.user.username}`}
+            : `Welcome to your dashboard,  ${data.user.username}!`}
         </span>
       </div>
     );
