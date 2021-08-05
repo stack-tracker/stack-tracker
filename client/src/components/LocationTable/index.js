@@ -44,7 +44,7 @@ function LocationTable(props) {
     )
   }
 
-  
+  // sort by date
   locationData = locationData.slice().sort( (a,b) => b.date.localeCompare(a.date) )
 
   function sumResult() {

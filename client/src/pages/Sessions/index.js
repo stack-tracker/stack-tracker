@@ -13,6 +13,7 @@ function Sessions() {
       )
     }
   
+  // sort by date
   let sessionData = data.user.games;
   sessionData = sessionData.slice().sort( (a,b) => b.date.localeCompare(a.date) )
 
