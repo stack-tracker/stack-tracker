@@ -3,48 +3,36 @@ import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis
 import Auth from '../../utils/auth';
 import { BrowserRouter as Route, Redirect } from 'react-router-dom';
 import Signup from '../../pages/Signup'
-
-// fetch user games array
-// deconstruct the array
+import { QUERY_USER } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 
 const Charts = () => {
-    const sessions = [
-        {sessionDate: "7/5/2021", profit: 1000},
-        {sessionDate: "7/8/2021", profit: 200},
-        {sessionDate: "7/12/2021", profit: -300},
-        {sessionDate: "7/15/2021", profit: 400},
-        {sessionDate: "7/16/2021", profit: 500},
-        {sessionDate: "7/19/2021", profit: -146},
-        {sessionDate: "7/20/2021", profit: 91},
-        {sessionDate: "7/21/2021", profit: 409},
-        {sessionDate: "7/22/2021", profit: -200},
-        {sessionDate: "7/23/2021", profit: 567},
-        {sessionDate: "7/24/2021", profit: -286},
-        {sessionDate: "7/25/2021", profit: -120},
-        {sessionDate: "7/28/2021", profit: 230},
-        {sessionDate: "7/29/2021", profit: 444},
-        {sessionDate: "7/30/2021", profit: -220},
-        {sessionDate: "7/31/2021", profit: 556},
-    ];
+    const { loading, data } = useQuery(QUERY_USER);
+    if (loading || !data) {
+        return (
+          null
+        )
+      }
 
-    const bankroll = [
-        {sessionDate: "7/5/2021", bankroll: 1000},
-        {sessionDate: "7/8/2021", bankroll: 1200},
-        {sessionDate: "7/12/2021", bankroll: 900},
-        {sessionDate: "7/15/2021", bankroll: 1300},
-        {sessionDate: "7/16/2021", bankroll: 1800},
-        {sessionDate: "7/19/2021", bankroll: 1654},
-        {sessionDate: "7/20/2021", bankroll: 1745},
-        {sessionDate: "7/21/2021", bankroll: 2154},
-        {sessionDate: "7/22/2021", bankroll: 1954},
-        {sessionDate: "7/23/2021", bankroll: 2521},
-        {sessionDate: "7/24/2021", bankroll: 2235},
-        {sessionDate: "7/25/2021", bankroll: 2115},
-        {sessionDate: "7/28/2021", bankroll: 2345},
-        {sessionDate: "7/29/2021", bankroll: 2789},
-        {sessionDate: "7/30/2021", bankroll: 2569},
-        {sessionDate: "7/31/2021", bankroll: 3125},
-    ];
+    let arrayBarGraph = data.user.games;
+    let sessions = [];
+    let lineBankroll = [];
+    let totalResult;
+    let newArray = [];
+    
+    arrayBarGraph.map(games => {
+        sessions.push({sessionDate: games.date, profit: games.result})
+        lineBankroll.push({sessionDate: games.date, bankroll: totalResult})
+        newArray.push(games.result);
+    })
+
+    console.log(newArray);
+    function accumulate (arr) {
+        arr.map((sum => value => sum += value)(0));
+        return arr;
+    }
+    console.log(accumulate(newArray));
+
 
     const bbPerHour = [
         {sessionDate: "7/5/2021", bbPerHour: 5, dollarsPerHour: 15},
@@ -65,12 +53,6 @@ const Charts = () => {
         {sessionDate: "7/31/2021", bbPerHour: 8, dollarsPerHour: 25},
     ];
 
-
-
-    useEffect(()=> {
-        //make a call to the dv for the USer by Id 
-        //on that user mode l would be the games array with all the games 
-    })
         if (Auth.loggedIn()) {
         return (
             <div className="Charts">
@@ -79,7 +61,7 @@ const Charts = () => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={bankroll}
+                    data={lineBankroll}
                     margin={{
                         top: 5,
                         right: 30,

@@ -58,4 +58,9 @@ gameSchema.virtual("bb_per_hour").get(function () {
   return bbPerHour.toFixed(2);
 });
 
+gameSchema.virtual("total_results").get(function () {
+  const totalResult = this.result;
+  return totalResult.toFixed(2);
+})
+
 module.exports = gameSchema;
