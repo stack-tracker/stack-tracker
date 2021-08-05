@@ -14,9 +14,9 @@ const Charts = () => {
         )
       }
 
-      let sessionData = data.user.games;
-      sessionData = sessionData.slice().sort( (a,b) => a.date.localeCompare(b.date) )
-      console.log(sessionData);
+    let sessionData = data.user.games;
+    sessionData = sessionData.slice().sort( (a,b) => a.date.localeCompare(b.date) )
+    console.log(sessionData);
 
     let arrayBarGraph = sessionData;
     // let arrayLineGraph = data.user.games;
