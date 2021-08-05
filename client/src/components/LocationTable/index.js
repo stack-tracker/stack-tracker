@@ -3,45 +3,14 @@ import React from "react";
 function LocationTable(props) {
   const { games, locationState } = props;
 
-  // getLocationData() returns an array of games from selected location
-  /* 
-    looks like:
-    [
-      {
-        bb_per_hour,
-        big_blind,
-        small_blind,
-        location,
-        buy_in,
-        cash_out,
-        result,
-        date,
-        hours,
-        cash_per_hour,
-      }, 
-      {
-        
-        ...
-      }
-    ]
-  */
   function getLocationData() {
     var result = games.filter((game) => {
       return game.location === locationState;
     });
-    // console.log(result);
     return result;
   }
 
   let locationData = getLocationData();
-
-  if (!locationState) {
-    return (
-      <div className=" self-center text-4xl text-gray-900 mx-10 ">
-        Select a Location!
-      </div>
-    );
-  }
 
   // sort by date
   locationData = locationData
@@ -80,6 +49,14 @@ function LocationTable(props) {
   const resultSum = sumResult();
   const meanCph = meanCashPerHour();
   const meanBbph = meanBigBlindPerHour();
+
+  if (!locationState) {
+    return (
+      <div className=" self-center text-4xl text-gray-900 mx-10 ">
+        Select a Location!
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-wrap self-center md:mx-10 md:overscroll-x-none ">

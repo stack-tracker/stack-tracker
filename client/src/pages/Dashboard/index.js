@@ -11,7 +11,6 @@ function Dashboard() {
   const { loading, data } = useQuery(QUERY_USER_BASIC);
 
   if (Auth.loggedIn()) {
-    console.log(data);
     return (
       <div className="grid gap-6 grid-cols-3 h-screen flex">
         <Sidebar />
