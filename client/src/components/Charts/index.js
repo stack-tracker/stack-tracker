@@ -14,27 +14,43 @@ const Charts = () => {
         )
       }
 
-    let arrayBarGraph = data.user.games;
-    let arrayLineGraph = data.user.games;
+      let sessionData = data.user.games;
+      sessionData = sessionData.slice().sort( (a,b) => a.date.localeCompare(b.date) )
+      console.log(sessionData);
+
+    let arrayBarGraph = sessionData;
+    // let arrayLineGraph = data.user.games;
     let sessions = [];
-    let totalResult;
-    let lineBankroll = [];
-    let newArray = [];
+    // let totalResult;
+    // let lineBankroll = [];
+    // let newArray = [];
     
     arrayBarGraph.map(games => {
         sessions.push({sessionDate: games.date, profit: games.result})
     })
 
-    const accumulate = arr => arr.map((sum => value => sum += value)(0));
+    // const accumulate = arr => arr.map((sum => value => sum += value)(0));
 
-    console.log(accumulate(newArray));
+    // console.log(accumulate(newArray));
 
-    arrayLineGraph.map(games => {
-        newArray.push(games.result);
-        let superNewArray = accumulate(newArray);
-        lineBankroll.push({sessionDate: games.date, bankroll: superNewArray })
-        console.log(accumulate(newArray));
-    })
+    // arrayLineGraph.map(games => {
+    //     newArray.push(games.result);
+    //     let superNewArray = accumulate(newArray);
+    //     lineBankroll.push({sessionDate: games.date, bankroll: superNewArray })
+    //     console.log(accumulate(newArray));
+    // })
+
+    let resultsArr = [];
+    for (let i=0; i<data.user.games.length; i++) {
+      resultsArr.push(data.user.games[i].result);
+    }
+    
+    resultsArr = resultsArr.map((result, i) => resultsArr.slice(0, i + 1).reduce((a, b) => a + b));
+    console.log(resultsArr);
+
+    let lineBankroll = sessionData.map((game, i) => {
+      return {sessionDate: game.date, bankroll: resultsArr[i] }
+    });
     
 
     const bbPerHour = [
