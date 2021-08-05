@@ -36,7 +36,7 @@ function Sessions() {
       let mean = 0;
       mean = data.user.games[i].bb_per_hour / data.user.games.length;
 
-      return mean;
+      return mean.toFixed(2);
     }
   }
 
