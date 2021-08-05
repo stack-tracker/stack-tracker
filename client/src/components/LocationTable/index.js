@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 function LocationTable(props) {
   const { games, locationState } = props;
-  
+
   // getLocationData() returns an array of games from selected location
   /* 
     looks like:
@@ -26,32 +26,33 @@ function LocationTable(props) {
     ]
   */
   function getLocationData() {
-    var result = games.filter(game => {
+    var result = games.filter((game) => {
       return game.location === locationState;
     });
     // console.log(result);
     return result;
   }
 
-
   let locationData = getLocationData();
 
-  if(!locationState) {
-    return(
-      <div className="col-span-2 self-center text-4xl text-gray-900">
+  if (!locationState) {
+    return (
+      <div className=" self-center text-4xl text-gray-900 mx-10 ">
         Select a Location!
       </div>
-    )
+    );
   }
 
   // sort by date
-  locationData = locationData.slice().sort( (a,b) => b.date.localeCompare(a.date) )
+  locationData = locationData
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   function sumResult() {
     const locationData = getLocationData();
     console.log(locationData);
     let sum = 0;
-    for(let i=0; i<locationData.length; i++) {
+    for (let i = 0; i < locationData.length; i++) {
       sum += locationData[i].result;
       console.log(sum);
     }
@@ -61,7 +62,7 @@ function LocationTable(props) {
   function meanCashPerHour() {
     const locationData = getLocationData();
     let mean = 0;
-    for (let i=0; i<locationData.length; i++) {
+    for (let i = 0; i < locationData.length; i++) {
       mean += locationData[i].cash_per_hour / locationData.length;
     }
     return mean.toFixed(2);
@@ -70,21 +71,20 @@ function LocationTable(props) {
   function meanBigBlindPerHour() {
     const locationData = getLocationData();
     let mean = 0;
-    for (let i=0; i<locationData.length; i++) {
+    for (let i = 0; i < locationData.length; i++) {
       mean += locationData[i].bb_per_hour / locationData.length;
     }
     return mean.toFixed(2);
   }
-  
+
   const resultSum = sumResult();
   const meanCph = meanCashPerHour();
   const meanBbph = meanBigBlindPerHour();
-  
-  return(
-    <div className="col-span-2 self-center">
-      <div className="mb-4 py-6 text-gray-900">
 
-        <span className="font-serif text-6xl">{locationState}</span>
+  return (
+    <div className="flex flex-wrap self-center md:mx-10 md:overscroll-x-none ">
+      <div className="mb-4 py-6 text-gray-900">
+        <span className="text-5xl">{locationState}</span>
       </div>
 
       <table className="p-4 mb-4 self-center">
@@ -92,9 +92,13 @@ function LocationTable(props) {
           <tr className="border-r-4 border-t-4 border-b-4 border-gray-900">
             <th className="border-2 border-gray-900 p-3">Bankroll:</th>
             <td className="border-2 border-gray-900 p-3">${resultSum}</td>
-            <th className="border-2 border-gray-900 p-3 ">Average Cash per Hour:</th>
+            <th className="border-2 border-gray-900 p-3 ">
+              Average Cash per Hour:
+            </th>
             <td className="border-2 border-gray-900 p-3">${meanCph}</td>
-            <th className="border-2 border-gray-900 p-3 ">Average Big Blinds per Hour:</th>
+            <th className="border-2 border-gray-900 p-3 ">
+              Average Big Blinds per Hour:
+            </th>
             <td className="border-2 border-gray-900 p-3">{meanBbph}</td>
           </tr>
         </thead>
@@ -111,7 +115,9 @@ function LocationTable(props) {
             <th className="border-l-2 border-gray-900 p-3">Cash Out</th>
             <th className="border-l-2 border-gray-900 p-3">Result</th>
             <th className="border-l-2 border-gray-900 p-3">Cash Per Hour</th>
-            <th className="border-r-4 border-l-2 border-gray-900 p-3">Big Blind Per Hour</th>
+            <th className="border-r-4 border-l-2 border-gray-900 p-3">
+              Big Blind Per Hour
+            </th>
           </tr>
         </thead>
         <tbody className="border-l-4 border-r-4 border-b-4 border-gray-900 text-lg text-gray-900">
@@ -120,18 +126,28 @@ function LocationTable(props) {
               <td className="border-l-2 border-gray-900 p-3">{game.date}</td>
               <td className="border-l-2 border-gray-900 p-3">{game.hours}</td>
               <td className="border-l-2 border-gray-900 p-3">${game.buy_in}</td>
-              <td className="border-l-2 border-gray-900 p-3">${game.small_blind}</td>
-              <td className="border-l-2 border-gray-900 p-3">${game.big_blind}</td>
-              <td className="border-l-2 border-gray-900 p-3">${game.cash_out}</td>
+              <td className="border-l-2 border-gray-900 p-3">
+                ${game.small_blind}
+              </td>
+              <td className="border-l-2 border-gray-900 p-3">
+                ${game.big_blind}
+              </td>
+              <td className="border-l-2 border-gray-900 p-3">
+                ${game.cash_out}
+              </td>
               <td className="border-l-2 border-gray-900 p-3">${game.result}</td>
-              <td className="border-l-2 border-gray-900 p-3">${game.cash_per_hour}</td>
-              <td className="border-l-2 border-gray-900 p-3">{game.bb_per_hour}</td>
+              <td className="border-l-2 border-gray-900 p-3">
+                ${game.cash_per_hour}
+              </td>
+              <td className="border-l-2 border-gray-900 p-3">
+                {game.bb_per_hour}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 export default LocationTable;
