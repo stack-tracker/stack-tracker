@@ -20,6 +20,13 @@ module.exports = {
         'poker-image': "url('./assets/images/poker-image.jpg')"
       })
     },
+    backgroundSize: {
+      "auto": "auto",
+      "cover": "cover",
+      "contain": "contain",
+      "50%": "50%",
+      "16": "4rem"
+    }
   },
   variants: {
     extend: {

@@ -12,9 +12,9 @@ function Header() {
   if (Auth.loggedIn()) {
     return(
       <header className="z-100">
-        <div className="h-screen bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
-          <h1 className="font-serif text-gray-100 drop-shadow-2xl text-8xl absolute inset-x-48 inset-y-56">Stack Tracker</h1>
-          <h2 className="font-serif text-gray-100 text-6xl py-5 absolute inset-x-48 inset-y-80">The Poker Bankroll App</h2>
+        <div className="pl-20 justify-end flex flex-col h-96 w-screen bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
+          <h1 className="font-serif text-gray-100 drop-shadow-2xl text-8xl inset-x-48 inset-y-44">Stack Tracker:</h1>
+          <h2 className="font-serif text-gray-100 text-6xl py-5 inset-x-48 inset-y-96">The Poker Bankroll App</h2>
         </div>
           <nav>
             <ul className="flex flex-row w-full bg-gray-800 font-serif text-4xl px-16 py-10 text-gray-100 justify-between fixed top-0">
@@ -48,9 +48,9 @@ function Header() {
   } else {
     return(
       <header className="z-100">
-        <div className="h-screen bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
-          <h1 className="font-serif text-gray-100 drop-shadow-2xl text-8xl absolute inset-x-48 inset-y-56">Stack Tracker</h1>
-          <h2 className="font-serif text-gray-100 text-6xl py-5 absolute inset-x-48 inset-y-80">The Poker Bankroll App</h2>
+        <div className="pl-20 justify-end flex flex-col h-96 w-screen bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
+          <h1 className="font-serif text-gray-100 drop-shadow-2xl text-8xl inset-x-48 inset-y-44">Stack Tracker:</h1>
+          <h2 className="font-serif text-gray-100 text-6xl py-5 inset-x-48 inset-y-96">The Poker Bankroll App</h2>
         </div>
           <nav>
             <ul className="flex flex-row w-full bg-gray-800 font-serif text-4xl px-16 py-10 text-gray-100 justify-between fixed top-0">

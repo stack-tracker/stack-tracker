@@ -20,6 +20,7 @@ function LocationTable(props) {
         cash_per_hour,
       }, 
       {
+        
         ...
       }
     ]
