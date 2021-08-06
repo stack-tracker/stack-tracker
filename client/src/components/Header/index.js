@@ -21,7 +21,7 @@ function Header() {
             <div className="group">
                 <li>
                   <button className="md:pr-20">{bars}</button>
-                  <ul className="bg-gray-800 transform scale-0 text-center p-6 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top w-max">
+                  <ul className="z-100 bg-gray-800 transform scale-0 text-center p-6 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top w-max">
                     <Link to='/dashboard'><li className="py-2 hover:text-gray-600 transform hover:scale-110 duration-75">Dashboard</li></Link>
                     <Link to='/sessions'><li className="py-2 hover:text-gray-600 transform hover:scale-110 duration-75">Sessions</li></Link>
                     <Link to='/locations'><li className="py-2 hover:text-gray-600 transform hover:scale-110 duration-75">Locations</li></Link>
