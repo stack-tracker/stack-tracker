@@ -56,8 +56,8 @@ function AddSession() {
     }
   };
 
-  if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) return <div className="m-5 p-10 text-center text-4xl">Submitting your session</div>;
+  if (error) return <div className="m-5 p-10 text-center text-4xl">Sorry, your session wasn't submitted</div>;
 
   if (Auth.loggedIn()) {
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LineChart, Line, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis, ReferenceLine, Bar } from 'recharts';
 import Auth from '../../utils/auth';
 import { BrowserRouter as Route, Redirect } from 'react-router-dom';
@@ -19,26 +19,11 @@ const Charts = () => {
     console.log(sessionData);
 
     let arrayBarGraph = sessionData;
-    // let arrayLineGraph = data.user.games;
     let sessions = [];
-    // let totalResult;
-    // let lineBankroll = [];
-    // let newArray = [];
     
     arrayBarGraph.map(games => {
         sessions.push({sessionDate: games.date, profit: games.result})
     })
-
-    // const accumulate = arr => arr.map((sum => value => sum += value)(0));
-
-    // console.log(accumulate(newArray));
-
-    // arrayLineGraph.map(games => {
-    //     newArray.push(games.result);
-    //     let superNewArray = accumulate(newArray);
-    //     lineBankroll.push({sessionDate: games.date, bankroll: superNewArray })
-    //     console.log(accumulate(newArray));
-    // })
 
     let resultsArr = [];
     for (let i=0; i<data.user.games.length; i++) {
@@ -57,25 +42,6 @@ const Charts = () => {
       return {sessionDate: game.date, bbPerHour: game.bb_per_hour, dollarsPerHour: game.cash_per_hour}
     });
     console.log(bbPerHour);
-
-    // const bbPerHour = [
-    //     {sessionDate: "7/5/2021", bbPerHour: 5, dollarsPerHour: 15},
-    //     {sessionDate: "7/8/2021", bbPerHour: 8, dollarsPerHour: 25},
-    //     {sessionDate: "7/12/2021", bbPerHour: 6, dollarsPerHour: 17},
-    //     {sessionDate: "7/15/2021", bbPerHour: 12, dollarsPerHour: 8},
-    //     {sessionDate: "7/16/2021", bbPerHour: 4, dollarsPerHour: 12},
-    //     {sessionDate: "7/19/2021", bbPerHour: 6, dollarsPerHour: 18},
-    //     {sessionDate: "7/20/2021", bbPerHour: 12, dollarsPerHour: 12},
-    //     {sessionDate: "7/21/2021", bbPerHour: 15, dollarsPerHour: 11},
-    //     {sessionDate: "7/22/2021", bbPerHour: 2, dollarsPerHour: 22},
-    //     {sessionDate: "7/23/2021", bbPerHour: 7, dollarsPerHour: 30},
-    //     {sessionDate: "7/24/2021", bbPerHour: 3, dollarsPerHour: 25},
-    //     {sessionDate: "7/25/2021", bbPerHour: -5, dollarsPerHour: 14},
-    //     {sessionDate: "7/28/2021", bbPerHour: -10, dollarsPerHour: 25},
-    //     {sessionDate: "7/29/2021", bbPerHour: 10, dollarsPerHour: 14},
-    //     {sessionDate: "7/30/2021", bbPerHour: 15, dollarsPerHour: 25},
-    //     {sessionDate: "7/31/2021", bbPerHour: 8, dollarsPerHour: 25},
-    // ];
 
         if (Auth.loggedIn()) {
         return (

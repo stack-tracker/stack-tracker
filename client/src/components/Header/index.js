@@ -11,8 +11,8 @@ const plus = <FontAwesomeIcon icon={faPlus} />;
 function Header() {
   if (Auth.loggedIn()) {
     return(
-      <header className="z-100 border-8 top-1">
-        <div className="pl-20 justify-end flex border-8 flex-col h-96 w-full bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
+      <header className="z-100">
+        <div className="pl-20 justify-end flex flex-col h-96 w-full bg-gray-500 bg-poker-image bg-cover bg-blend-overlay">
           <h1 className="font-serif text-gray-100 drop-shadow-2xl text-6xl md:text-8xl inset-x-48 inset-y-44">Stack Tracker:</h1>
           <h2 className="font-serif text-gray-100 text-4xl md:text-6xl py-5 inset-x-48 inset-y-96">The Poker Bankroll App</h2>
         </div>
