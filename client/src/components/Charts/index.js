@@ -45,7 +45,7 @@ const Charts = () => {
 
         if (Auth.loggedIn()) {
         return (
-            <div className="Charts p-6 text-gray-800">
+            <div className="z-10 Charts p-6 text-gray-800">
                 <h1 className="font-bold text-4xl text-center">Chart Overview</h1>
                 <h2 className="p-4 pl-52 text-lg">Total Bankroll</h2>
                 <LineChart

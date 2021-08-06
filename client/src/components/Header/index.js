@@ -17,7 +17,7 @@ function Header() {
           <h2 className="font-serif text-gray-100 text-4xl md:text-6xl py-5 inset-x-48 inset-y-96">The Poker Bankroll App</h2>
         </div>
           <nav>
-            <ul className="flex flex-row w-full bg-gray-800 font-serif md:flex-row flex-col-reverse text-center item-center justify-center text-4xl px-16 md:py-10 text-gray-100 justify-between fixed top-0">
+            <ul className="z-50 flex flex-row w-full bg-gray-800 font-serif md:flex-row flex-col-reverse text-center item-center justify-center text-4xl px-16 md:py-10 text-gray-100 justify-between fixed top-0">
             <div className="group">
                 <li>
                   <button className="md:pr-20">{bars}</button>
