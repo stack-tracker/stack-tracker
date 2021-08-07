@@ -62,7 +62,7 @@ function AddSession() {
   if (Auth.loggedIn()) {
     return (
       <div className="grid grid-col-1 h-screen content-center">
-        <span className="text-6xl text-gray-900 text-center pb-6">
+        <span className="font-serif font-bold text-6xl text-gray-900 text-center py-6">
           Add a Session!
         </span>
         <form

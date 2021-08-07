@@ -29,7 +29,7 @@ const Charts = () => {
     for (let i=0; i<data.user.games.length; i++) {
       resultsArr.push(data.user.games[i].result);
     }
-    
+    //accumulate results; add next index of array to sum of previous indexes
     resultsArr = resultsArr.map((result, i) => resultsArr.slice(0, i + 1).reduce((a, b) => a + b));
     console.log(resultsArr);
 
@@ -46,9 +46,11 @@ const Charts = () => {
         if (Auth.loggedIn()) {
         return (
             <div className="z-10 Charts p-6 text-gray-800">
-                <h1 className="font-bold text-4xl text-center">Chart Overview</h1>
-                <h2 className="p-4 pl-52 text-lg">Total Bankroll</h2>
-                <LineChart
+              <h1 className="font-bold font-serif text-6xl text-center p-10">Chart Overview</h1>
+              <div className="flex flex-col xl:flex-row items-center xl:justify-between">
+                <div className="flex flex-col my-4 justify-center items-center border-8 border-gray-900 p-4">
+                  <h2 className="p-4 text-xl font-bold">Total Bankroll</h2>
+                  <LineChart
                     width={500}
                     height={300}
                     data={lineBankroll}
@@ -58,7 +60,7 @@ const Charts = () => {
                         left: 20,
                         bottom: 5,
                     }}
-                >
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="sessionDate" />
                     <YAxis />
@@ -66,19 +68,21 @@ const Charts = () => {
                     <Legend />
 
                     <Line type="monotone" dataKey="bankroll" stroke="#8884d8" activeDot={{ r: 8 }} />
-                </LineChart>
-                <h2 className="p-4 pl-52 text-lg">Individual Sessions</h2>
-                <BarChart
+                  </LineChart>
+                </div>
+                <div className="flex flex-col my-4 justify-center items-center border-8 border-gray-900 p-4">
+                  <h2 className="p-4 text-xl font-bold">Individual Sessions</h2>
+                  <BarChart
                     width={500}
                     height={300}
                     data={sessions}
                     margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
                     }}
-                >
+                   >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="sessionDate" />
                     <YAxis />
@@ -87,9 +91,11 @@ const Charts = () => {
 
                     <ReferenceLine y={0} stroke="#000" />
                     <Bar dataKey="profit" fill="#82ca9d" />
-                </BarChart>
-                <h2 className="p-4 pl-48 text-lg">Big Blinds Per Hour</h2>
-                <LineChart
+                  </BarChart>
+                </div>
+                <div className="flex flex-col my-4 justify-center items-center border-8 border-gray-900 p-4">
+                  <h2 className="p-4 text-xl font-bold">Big Blinds Per Hour</h2>
+                  <LineChart
                     width={500}
                     height={300}
                     data={bbPerHour}
@@ -99,16 +105,18 @@ const Charts = () => {
                         left: 20,
                         bottom: 5,
                     }}
-                >
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="sessionDate" />
                     <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="left" type="monotone" dataKey="bbPerHour" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line yAxisId="right" type="monotone" dataKey="dollarsPerHour" stroke="#82ca9d" />
-                </LineChart>
+                    <YAxis yAxisId="right" orientation="right" />
+                    <Tooltip />
+                    <Legend />
+                    <Line yAxisId="left" type="monotone" dataKey="bbPerHour" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line yAxisId="right" type="monotone" dataKey="dollarsPerHour" stroke="#82ca9d" />
+                    </LineChart>
+                </div>
+              </div>
             </div>
         )} else {
             return (

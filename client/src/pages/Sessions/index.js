@@ -67,7 +67,7 @@ function Sessions() {
       </div>
 
       <div className="flex justify-center">
-        <span className="font-serif text-6xl text-center text-gray-900 p-6">
+        <span className="font-serif font-bold text-6xl text-center text-gray-900 p-6">
           {data.user.username}'s Sessions!
         </span>
       </div>
@@ -83,7 +83,6 @@ function Sessions() {
               </tr>
             </thead>
           
-
             <thead>
               <tr>
                 <th className="border-r-2 border-gray-900 p-0 md:p-1">Hours</th>
@@ -122,92 +121,6 @@ function Sessions() {
         ))}
       </div>
     </>
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-    // <div className>
-      // {/* <span className="font-serif text-6xl p-6">
-      //   {data.user.username}'s Sessions!
-      // </span> */}
-
-    //   {/* <table className="p-4 mb-4 self-center">
-    //     <thead>
-    //       <tr className="border-r-4 border-t-4 border-b-4 border-gray-900">
-    //         <th className="border-2 border-gray-900 p-3">Bankroll:</th>
-    //         <td className="border-2 border-gray-900 p-3">${bankRoll}</td>
-    //         <th className="border-2 border-gray-900 p-3 ">
-    //           Average Cash per Hour:
-    //         </th>
-    //         <td className="border-2 border-gray-900 p-3">${meanCph}</td>
-    //         <th className="border-2 border-gray-900 p-3 ">
-    //           Average Big Blinds per Hour:
-    //         </th>
-    //         <td className="border-2 border-gray-900 p-3">{meanBbph}</td>
-    //       </tr>
-    //     </thead>
-    //   </table> */}
-
-    //     {/* <thead className="border-t-4 border-b-2 border-gray-900 text-xl text-gray-900">
-    //       <tr className="border-t-4 border-gray-900">
-    //         <th className="border-l-4 border-gray-900 p-3">Date</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Location</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Hours</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Buy In</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Small Blind</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Big Blind</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Cash Out</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Result</th>
-    //         <th className="border-l-2 border-gray-900 p-3">Cash Per Hour</th>
-    //         <th className="border-r-4 border-l-2 border-gray-900 p-3">
-    //           Big Blind Per Hour
-    //         </th>
-    //       </tr>
-    //     </thead> */}
-    //     {/* <div className="grid grid-cols-2"> */}
-
-    //       {/* {sessionData.map((game, i) => (
-    //         <table className="border-4 border-gray-900"></table> */}
-            
-            
-            
-            
-    //         {/* // <tr key={i} className="border-b-2 border-gray-900">
-    //         //   <td className="border-l-2 border-gray-900 p-3">{game.date}</td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     {game.location}
-    //         //   </td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">{game.hours}</td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">${game.buy_in}</td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     ${game.small_blind}
-    //         //   </td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     ${game.big_blind}
-    //         //   </td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     ${game.cash_out}
-    //         //   </td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">${game.result}</td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     ${game.cash_per_hour}
-    //         //   </td>
-    //         //   <td className="border-l-2 border-gray-900 p-3">
-    //         //     {game.bb_per_hour}
-    //         //   </td>
-    //         // </tr>
-    //         ))} */}
-    //         {/* </div> */}
-    //  {/* </div> */}
   );
 }
 
